@@ -25,13 +25,7 @@
 
 import { useState } from 'react';
 
-const Display = ({ counter }) => {
-  return (
-    <div>
-      <p>{counter}</p>
-    </div>
-  )
-}
+const Display = ({ counter }) => <div><p>{counter}</p></div>
 
 const Button = ({ handleClick, text }) => <button onClick={handleClick}>{text}</button>
 
