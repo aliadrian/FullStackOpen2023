@@ -1,4 +1,3 @@
-import Note from './components/Note';
 import Course from './components/Course';
 
 function App() {

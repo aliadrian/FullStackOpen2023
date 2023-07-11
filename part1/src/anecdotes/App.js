@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react'
+import React from 'react'
+import { useState, useEffect } from 'react'
 
 const Button = ({ handleClick, text }) => <div><button onClick={handleClick}>{text}</button></div>
 

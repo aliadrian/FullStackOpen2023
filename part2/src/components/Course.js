@@ -7,7 +7,7 @@ const Course = ({ course }) => {
     return parts.reduce((sum, part) => sum + part.exercises, 0);
   }
 
-  console.log(course);
+  // console.log(course);
   return (
     <div>
       {course.map((courseObj) => (
