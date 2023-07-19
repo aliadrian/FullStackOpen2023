@@ -3,6 +3,8 @@ import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 import personService from './services/persons'
+import Notification from './components/Notification'
+import './index.css'
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -14,6 +16,8 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [showFilter, setShowFilter] = useState('')
+  const [succesMessage, setSuccesMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
     console.log('effect')
@@ -64,7 +68,12 @@ const App = () => {
         setPersons([...persons, returnedPerson])
         setNewName('')
         setNewNumber('')
+        setSuccesMessage(`Added ${newName}`)
       })
+    setTimeout(() => {
+      setSuccesMessage(null)
+      setErrorMessage(null)
+    }, 5000)
   }
 
   const filteredPersons = persons.filter((person) => {
@@ -80,6 +89,12 @@ const App = () => {
         setPersons(persons.filter(p => p.id !== id))
       })
       .catch(error => {
+        setErrorMessage(
+          `Information of ${newName} has already been removed from server`
+        )
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
         console.log(`Error deleting person with ID ${id}:`, error)
       })
   }
@@ -87,6 +102,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={succesMessage} />
       <Filter handleNameChange={handleNameChange} />
       <PersonForm
         addPerson={addPerson}
