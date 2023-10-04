@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import Filter from './components/Filter';
-import Countries from "./components/Countries";
 import "./index.css"
 import countriesService from "./services/countries";
 import CountryList from "./components/Country";
-import CountryWeather from "./components/CountryWeather";
 
 const App = () => {
   const [countries, setCountries] = useState([])

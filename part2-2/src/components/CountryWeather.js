@@ -4,17 +4,20 @@ import React, { useState, useEffect } from 'react';
 const CountryWeather = ({ countryName }) => {
 
   // console.log(countryName);
+  const API_KEY = process.env.REACT_APP_API_KEY
+
   const api = {
-    key: "24e43a34517ec13b763280c330014a2e",
+    key: API_KEY,
     base: "https://api.openweathermap.org/data/2.5/",
   };
 
   const [weather, setWeather] = useState(null);
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     const fetchWeather = async () => {
       try {
-        const response = await fetch(`${api.base}weather?q=${countryName}&units=metric&APPID=${api.key}`);
+        const response = await fetch(`${api.base}weather?q=${countryName}&units=metric&APPID=${API_KEY}`);
         const result = await response.json();
         // console.log(result);
         setWeather(result);
@@ -25,6 +28,7 @@ const CountryWeather = ({ countryName }) => {
 
     fetchWeather();
   }, [countryName]); // Trigger the effect when countryName changes
+  /* eslint-disable react-hooks/exhaustive-deps */
 
   return (
     <div>
