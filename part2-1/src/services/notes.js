@@ -7,7 +7,20 @@ const getAll = async () => {
   return response.data
 }
 
+const generateUniqueId = () => {
+  const timestamp = new Date().getTime(); // Get current timestamp
+  const random = Math.floor(Math.random() * 10000); // Generate a random number
+
+  return `${timestamp}-${random}`;
+};
+
 const create = async (newObject) => {
+
+  // const existingNote = await axios.get(`${baseUrl}/${newObject.id}`)
+
+  // if (existingNote) {
+  //   newObject.id = generateUniqueId();
+  // }
   const request = axios.post(baseUrl, newObject)
   const response = await request
   return response.data

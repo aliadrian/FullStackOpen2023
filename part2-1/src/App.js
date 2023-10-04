@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import Note from './components/Note';
-import noteService from './services/notes'
 import Notification from './components/Notification';
 import Footer from './components/Footer';
+import noteService from './services/notes'
 
 const App = () => {
-  const [notes, setNotes] = useState([])
+  const [notes, setNotes] = useState(null)
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
   const [errorMessage, setErrorMessage] = useState(null)
@@ -18,6 +18,27 @@ const App = () => {
       })
   }, [])
 
+  if (!notes) {
+    return null;
+  }
+
+  const addNote = (e) => {
+    e.preventDefault()
+
+    const noteObject = {
+      content: newNote,
+      important: Math.random() < 0.5,
+    }
+
+    noteService
+      .create(noteObject)
+      .then(returnedNote => {
+        setNotes(notes.concat(returnedNote))
+        setNewNote('')
+      })
+  }
+
+
   const handleNoteChange = (e) => {
     setNewNote(e.target.value)
   }
@@ -26,7 +47,7 @@ const App = () => {
     ? notes
     : notes.filter(note => note.important)
 
-  const toggleImportance = (id) => {
+  const toggleImportance = id => {
     console.log(`ìmportance of ${id} needs to be toggled`)
     const note = notes.find(n => n.id === id)
     const changedNote = { ...note, important: !note.important }
@@ -44,22 +65,6 @@ const App = () => {
           setErrorMessage(null)
         }, 5000)
         setNotes(notes.filter(n => n.id !== id))
-      })
-  }
-
-  const addNote = (e) => {
-    e.preventDefault()
-    const noteObject = {
-      content: newNote,
-      important: Math.random() < 0.5,
-      id: notes.length + 1
-    }
-
-    noteService
-      .create(noteObject)
-      .then(returnedNote => {
-        setNotes(notes.concat(returnedNote))
-        setNewNote('')
       })
   }
 

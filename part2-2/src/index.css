@@ -1,0 +1,9 @@
+html,
+body {
+  margin: 0;
+  padding: 0.25rem 0 0.25rem 0.25rem;
+}
+
+.flag {
+  width: 10%;
+}
