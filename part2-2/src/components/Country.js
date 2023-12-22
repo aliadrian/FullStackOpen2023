@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import CountryWeather from './CountryWeather';
 
 const Country = ({ country, showDetails, onToggleDetails }) => {
@@ -37,25 +37,4 @@ const Country = ({ country, showDetails, onToggleDetails }) => {
   );
 };
 
-const CountryList = ({ filteredCountries }) => {
-  const [showDetails, setShowDetails] = useState(null)
-
-  const handleToggleDetails = (countryName) => {
-    setShowDetails(showDetails === countryName ? null : countryName);
-  }
-
-  return (
-    <div>
-      {filteredCountries.map((country, index) => (
-        <Country
-          key={index}
-          country={country}
-          showDetails={showDetails}
-          onToggleDetails={handleToggleDetails}
-        />
-      ))}
-    </div>
-  )
-}
-
-export default CountryList
+export default Country;
